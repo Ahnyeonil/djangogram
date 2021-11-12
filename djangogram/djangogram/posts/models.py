@@ -11,7 +11,7 @@ class TimeStamedModel(models.Model):
         abstract = True
 
 class Post(TimeStamedModel):
-    author = models.FreignKey(
+    author = models.ForeignKey(
                 user_model.User, 
                 null=True,
                 on_delete=models.CASCADE, 
@@ -25,16 +25,16 @@ class Post(TimeStamedModel):
                 )
     
 class Comment(TimeStamedModel):
-    author = models.FreignKey(
+    author = models.ForeignKey(
                 user_model.User, 
                 null=True,
                 on_delete=models.CASCADE, 
-                related_name = 'post_author'
+                related_name = 'comment_author'
             )
-    posts = models.FreignKey(
+    posts = models.ForeignKey(
                 Post, 
                 null=True,
                 on_delete=models.CASCADE, 
-                related_name = 'post_author'
+                related_name = 'comment_author'
             ) 
     contents = models.TextField(blank=True)
